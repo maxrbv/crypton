@@ -4,7 +4,7 @@ import * as anchor from '@project-serum/anchor';
 import BN from "bn.js"
 import provider from './lib/AnchorProvider';
 import anchorProgram from './lib/program';
-import { donationId, ownerId } from './lib/pubKey'
+import { fundId, ownerId } from './lib/pubKey'
 import fund from './accounts/fund.json'
 import Wallet from '@project-serum/sol-wallet-adapter';
 
@@ -31,7 +31,7 @@ function App() {
     setConnected(true);
     if (wallet.publicKey?.toString() === ownerId.toString()) {
       setOwner(ownerId);
-      showBalance(donationId);
+      showBalance(fundId);
     }
     else
       showBalance(wallet.publicKey as PublicKey)
@@ -92,15 +92,15 @@ function App() {
   
   const sendDonation = async() => {
     if (isOwner()) {
-      const fundBalance = await connection.getBalance(donationId);
+      const fundBalance = await connection.getBalance(fundId);
       console.log('Preparing transaction')
-      await prepareTransaction(donationId, ownerId, fundBalance);
-      await showBalance(donationId);
+      await prepareTransaction(fundId, ownerId, fundBalance);
+      await showBalance(fundId);
       console.log(`Withdrawed ${fundBalance} lamports to ${ownerId.toBase58()}`);
     }
     else {
       console.log('Preparing transaction')
-      await prepareTransaction(wallet.publicKey as PublicKey, donationId, Number(donationAmount));
+      await prepareTransaction(wallet.publicKey as PublicKey, fundId, Number(donationAmount));
       await showBalance(wallet.publicKey as PublicKey);
       console.log(`Sent ${donationAmount} lamports from ${wallet.publicKey?.toBase58()}`);
     }
@@ -131,7 +131,7 @@ function App() {
         <Button onClick={sendDonation} style={{paddingLeft:'20px'}}>Withdraw donation</Button>
       </div>
       <div id='update'>
-        <Button onClick={() => showBalance(donationId)} style={{marginTop:'20px'}}>Update balance</Button>
+        <Button onClick={() => showBalance(fundId)} style={{marginTop:'20px'}}>Update balance</Button>
       </div></>
       ) : (
       <><div id='wallet'>

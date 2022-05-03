@@ -12,14 +12,17 @@ pub mod crypton_test {
             &ctx.accounts.to.key(),
             amount
         );
-        anchor_lang::solana_program::program::invoke(
+        let result = anchor_lang::solana_program::program::invoke(
             &ix,
             &[
                 ctx.accounts.from.to_account_info(),
                 ctx.accounts.to.to_account_info()
             ],
         );
-        Ok(())
+        match result {
+            Ok(_) => Ok(()),
+            Err(err) => Err(Error::from(err))
+        }
     }
 }
 

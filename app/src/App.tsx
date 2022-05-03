@@ -102,7 +102,7 @@ function App() {
       console.log('Preparing transaction')
       await prepareTransaction(wallet.publicKey as PublicKey, fundId, Number(donationAmount));
       await showBalance(wallet.publicKey as PublicKey);
-      console.log(`Sent ${donationAmount} lamports from ${wallet.publicKey?.toBase58()}`);
+      console.log(`Received ${donationAmount} lamports from ${wallet.publicKey?.toBase58()}`);
     }
   }
   

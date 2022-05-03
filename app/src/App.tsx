@@ -54,7 +54,7 @@ function App() {
     transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
     const fee = await connection.getFeeForMessage(
       transaction.compileMessage(),
-      'confirmed',
+      'confirmed'
     );
 
     if (isOwner()) {
@@ -128,10 +128,10 @@ function App() {
         <p style={{fontSize:'20px'}}>Curent fund balance: {balance} SOL</p>
       </div>
       <div id='donation' style={{display:'flex'}}>
-        <Button onClick={sendDonation} style={{paddingLeft:'20px'}}>Withdraw donation</Button>
+        <Button onClick={sendDonation} style={{marginLeft:'20px', fontSize:'16px'}}>Withdraw donation</Button>
       </div>
       <div id='update'>
-        <Button onClick={() => showBalance(fundId)} style={{marginTop:'20px'}}>Update balance</Button>
+        <Button onClick={() => showBalance(fundId)} style={{marginTop:'20px', fontSize:'16px'}}>Update balance</Button>
       </div></>
       ) : (
       <><div id='wallet'>
@@ -140,10 +140,10 @@ function App() {
       </div>
       <div id='donation' style={{display:'flex'}}>
         <TextField label="Amount (lamports)" value={donationAmount} onChange={e => setDonationAmount(e.target.value)}/>
-        <Button onClick={sendDonation} style={{paddingLeft:'20px'}}>Make a donation</Button>
+        <Button onClick={sendDonation} style={{marginLeft:'20px', fontSize:'16px'}}>Make a donation</Button>
       </div>
       <div id='update'>
-        <Button onClick={() => showBalance(wallet.publicKey as PublicKey)} style={{paddingTop:'20px'}}>Update balance</Button>
+        <Button onClick={() => showBalance(wallet.publicKey as PublicKey)} style={{marginTop:'20px', fontSize:'16px'}}>Update balance</Button>
       </div></>
       )}
     </div>
